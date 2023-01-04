@@ -1,5 +1,5 @@
 // Récupération des travaux depuis le fichier JSON
-const reponse = await fetch('../Backend/works.json');
+const reponse = await fetch('../Backend/swagger.yaml');
 const works = await reponse.json();
 
 // Création des balises
@@ -17,7 +17,7 @@ for (let i = 0; i < works.length; i++) {
     const  imageElement = document.createElement("img");
 
     // On accède à l'indice i de la liste works pour configurer la source de l'image.
-    imageElement.src = works[i].image;
+    imageElement.src = works[i].imageUrl;
     
     // Idem pour le nom
     const  nomElement = document.createElement("figcaption");
