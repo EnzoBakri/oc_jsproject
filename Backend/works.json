@@ -2,7 +2,7 @@
     {
       "id": 1,
       "title": "Abajour Tahina",
-      "image": "http://localhost:5678/images/abajour-tahina1651286843956.png",
+      "image": "../FrontEnd/assets/images/abajour-tahina.png",
       "categoryId": 1,
       "userId": 1,
       "category": {
@@ -13,7 +13,7 @@
     {
       "id": 2,
       "title": "Appartement Paris V",
-      "imageUrl": "http://localhost:5678/images/appartement-paris-v1651287270508.png",
+      "image": "../FrontEnd/assets/images/appartement-paris-v.png",
       "categoryId": 2,
       "userId": 1,
       "category": {
@@ -24,7 +24,7 @@
     {
       "id": 3,
       "title": "Restaurant Sushisen - Londres",
-      "imageUrl": "http://localhost:5678/images/restaurant-sushisen-londres1651287319271.png",
+      "image": "../FrontEnd/assets/images/restaurant-sushisen-londres.png",
       "categoryId": 3,
       "userId": 1,
       "category": {
@@ -35,7 +35,7 @@
     {
       "id": 4,
       "title": "Villa “La Balisiere” - Port Louis",
-      "imageUrl": "http://localhost:5678/images/la-balisiere1651287350102.png",
+      "image": "../FrontEnd/assets/images/la-balisiere.png",
       "categoryId": 2,
       "userId": 1,
       "category": {
@@ -46,7 +46,7 @@
     {
       "id": 5,
       "title": "Structures Thermopolis",
-      "imageUrl": "http://localhost:5678/images/structures-thermopolis1651287380258.png",
+      "image": "../FrontEnd/assets/images/structures-thermopolis.png",
       "categoryId": 1,
       "userId": 1,
       "category": {
@@ -57,7 +57,7 @@
     {
       "id": 6,
       "title": "Appartement Paris X",
-      "imageUrl": "http://localhost:5678/images/appartement-paris-x1651287435459.png",
+      "image": "../FrontEnd/assets/images/appartement-paris-x.png",
       "categoryId": 2,
       "userId": 1,
       "category": {
@@ -68,7 +68,7 @@
     {
       "id": 7,
       "title": "Pavillon “Le coteau” - Cassis",
-      "imageUrl": "http://localhost:5678/images/le-coteau-cassis1651287469876.png",
+      "image": "../FrontEnd/assets/images/le-coteau-cassis.png",
       "categoryId": 2,
       "userId": 1,
       "category": {
@@ -79,7 +79,7 @@
     {
       "id": 8,
       "title": "Villa Ferneze - Isola d'Elba",
-      "imageUrl": "http://localhost:5678/images/villa-ferneze1651287511604.png",
+      "image": "../FrontEnd/assets/images/villa-ferneze.png",
       "categoryId": 2,
       "userId": 1,
       "category": {
@@ -90,7 +90,7 @@
     {
       "id": 9,
       "title": "Appartement Paris XVIII",
-      "imageUrl": "http://localhost:5678/images/appartement-paris-xviii1651287541053.png",
+      "image": "../FrontEnd/assets/images/appartement-paris-xviii.png",
       "categoryId": 2,
       "userId": 1,
       "category": {
@@ -101,7 +101,7 @@
     {
       "id": 10,
       "title": "Bar “Lullaby” - Paris",
-      "imageUrl": "http://localhost:5678/images/bar-lullaby-paris1651287567130.png",
+      "image": "../FrontEnd/assets/images/bar-lullaby-paris.png",
       "categoryId": 3,
       "userId": 1,
       "category": {
@@ -112,7 +112,7 @@
     {
       "id": 11,
       "title": "Hotel First Arte - New Delhi",
-      "imageUrl": "http://localhost:5678/images/hotel-first-arte-new-delhi1651287605585.png",
+      "image": "../FrontEnd/assets/images/hotel-first-arte-new-delhi.png",
       "categoryId": 3,
       "userId": 1,
       "category": {
