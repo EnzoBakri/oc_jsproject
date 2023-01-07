@@ -98,6 +98,27 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
+button {
+	font-family: 'Syne';
+	font-size: 16px;
+	line-height: 19px;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	color: #1D6154;
+	background-color: #FFFEF8;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	padding: 10px 15px;
+}
+
+button:hover {
+	color: #FFFEF8;
+	background-color: #1D6154;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -121,10 +142,25 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
-#portfolio h2 {
-	text-align: center;
-	margin-bottom: 1em;
+
+#portfolio {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
+
+#portfolio h2 {
+	margin-bottom: 1.5em;
+}
+
+#filters {
+	display: flex;
+	justify-content: space-between;
+	height: 37px;
+	margin-bottom: 4em;
+	width: 53%;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
