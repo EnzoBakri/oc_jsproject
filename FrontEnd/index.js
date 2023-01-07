@@ -36,9 +36,7 @@ allButton.addEventListener("click", function() {
 const objectsButton = document.querySelector("#objects");
 
 objectsButton.addEventListener("click", function() {
-    const filteredWorks = works.filter(function(work) {
-        return work.categoryId === 1;
-    });
+    const filteredWorks = works.filter(work => work.categoryId === 1);
     document.querySelector(".gallery").innerHTML = "";
     generateWorks(filteredWorks);
 });
@@ -46,9 +44,7 @@ objectsButton.addEventListener("click", function() {
 const apartmentButton = document.querySelector("#apartment");
 
 apartmentButton.addEventListener("click", function() {
-    const filteredWorks = works.filter(function(work) {
-        return work.categoryId === 2;
-    });
+    const filteredWorks = works.filter(work => work.categoryId === 2);
     document.querySelector(".gallery").innerHTML = "";
     generateWorks(filteredWorks);
 });
@@ -56,9 +52,7 @@ apartmentButton.addEventListener("click", function() {
 const hotelRestaurantButton = document.querySelector("#hotel-restaurant");
 
 hotelRestaurantButton.addEventListener("click", function() {
-    const filteredWorks = works.filter(function(work) {
-        return work.categoryId === 3;
-    });
+    const filteredWorks = works.filter(work => work.categoryId === 3);
     document.querySelector(".gallery").innerHTML = "";
     generateWorks(filteredWorks);
 });
