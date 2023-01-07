@@ -95,7 +95,12 @@ nav li {
 	font-size: 1.2em;
 }
 
-li:hover {
+nav a {
+	text-decoration: none;
+	color: black;
+}
+
+nav a:hover {
 	color: #B1663C;
 }
 
@@ -117,6 +122,55 @@ button {
 button:hover {
 	color: #FFFEF8;
 	background-color: #1D6154;
+}
+
+/* login.html */
+
+#login {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 80px;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+}
+
+.form-email-password {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+}
+
+.form-column {
+	display: flex;
+	flex-direction: column;
+}
+
+.form-column label {
+	margin-bottom: 7px;
+	font-family: 'Work Sans';
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+}
+
+.form-column input {
+	width: 379px;
+	height: 51px;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	outline: none;
+}
+
+#login h2 {
+	margin-bottom: 37px;
+}
+
+#login a {
+	color: black;
 }
 
 #introduction {
@@ -211,9 +265,16 @@ input[type="submit"]{
 	color: white;
 	background-color: #1D6154;
 	margin : 2em auto ;
-	width: 180px;
 	text-align: center;
-	border-radius: 60px ;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	width: 180px;
+	height: 36px;
+	cursor: pointer;
+}
+
+input[type="submit"]:hover {
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 footer nav ul {
