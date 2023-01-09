@@ -22,14 +22,14 @@ async function basicLogin() {
             headers: { "Content-Type": "application/json" },
             body: payload
         });
-        
+
         if(response.status !== 200) {
             window.location.reload();
             alert("Incorrect credentials");
             return null;
         } else {
             const result = await response.json();
-            window.localStorage.setItem("result", JSON.stringify(result));
+            window.localStorage.setItem("Token", result.token);
             window.location="index.html";
             alert("Successfully connected"); 
         }
