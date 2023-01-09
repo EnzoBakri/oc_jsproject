@@ -9,7 +9,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script type="module" src="index.js"></script>
+	<script type="module" src="login.js"></script>
 </head>
 <body>
 
@@ -28,16 +28,14 @@
 <main>
 	<section id="login">
         <h2>Log In</h2>
-        <form method="post" action="#">
-            <div class="form-email-password">
-                <div class="form-column">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" size="30" required>
-                </div>
-                <div class="form-column">
-                    <label for="pass">Mot de passe</label>
-                    <input type="password" id="pass" minlength="8" required>
-                </div>
+        <form method="post" action="#" id="formElem">
+            <div class="form-column">
+                <label for="email">E-mail</label>
+                <input type="email" name="email">
+            </div>
+            <div class="form-column">
+                <label for="password">Mot de passe</label>
+                <input type="password" name="password">
             </div>
             <input type="submit" value="Se connecter">
         </form>

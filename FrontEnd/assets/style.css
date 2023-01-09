@@ -136,12 +136,8 @@ button:hover {
 form {
 	display: flex;
 	flex-direction: column;
-}
-
-.form-email-password {
-	display: flex;
-	flex-direction: column;
-	gap: 30px;
+	justify-content: space-between;
+	height: 300px;
 }
 
 .form-column {
