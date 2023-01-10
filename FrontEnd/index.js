@@ -11,10 +11,10 @@ function generateWorks(works) {
         // Création d'une balise dédiée à un projet
         const workElement = document.createElement("figure");
         // Création des balises
-        const  imageElement = document.createElement("img");
+        const imageElement = document.createElement("img");
         imageElement.src = article.imageUrl;
         imageElement.crossOrigin = "Anonymous";
-        const  nomElement = document.createElement("figcaption");
+        const nomElement = document.createElement("figcaption");
         nomElement.innerText = article.title;
         // On rattache les éléments à leur parent
         divGallery.appendChild(workElement);
@@ -25,34 +25,31 @@ function generateWorks(works) {
 
 generateWorks(works);
 
-// Gestion des boutons
-const allButton = document.querySelector("#all");
+const buttons = [{
+    id: 'all',
+    categoryId: null
+}, {
+    id: 'objects',
+    categoryId: 1
+}, {
+    id: 'apartment',
+    categoryId: 2
+}, {
+    id: 'hotel-restaurant',
+    categoryId: 3
+},
+]
 
-allButton.addEventListener("click", function() {
-    document.querySelector(".gallery").innerHTML = "";
-    generateWorks(works);
-});
-
-const objectsButton = document.querySelector("#objects");
-
-objectsButton.addEventListener("click", function() {
-    const filteredWorks = works.filter(work => work.categoryId === 1);
-    document.querySelector(".gallery").innerHTML = "";
-    generateWorks(filteredWorks);
-});
-
-const apartmentButton = document.querySelector("#apartment");
-
-apartmentButton.addEventListener("click", function() {
-    const filteredWorks = works.filter(work => work.categoryId === 2);
-    document.querySelector(".gallery").innerHTML = "";
-    generateWorks(filteredWorks);
-});
-
-const hotelRestaurantButton = document.querySelector("#hotel-restaurant");
-
-hotelRestaurantButton.addEventListener("click", function() {
-    const filteredWorks = works.filter(work => work.categoryId === 3);
-    document.querySelector(".gallery").innerHTML = "";
-    generateWorks(filteredWorks);
-});
+buttons.forEach(button => {
+    const buttonElement = document.getElementById(button.id)
+    buttonElement.addEventListener("click", function () {
+        document.querySelector(".gallery").innerHTML = "";
+        if (button.categoryId === null) {
+            generateWorks(works);
+         } else {
+            const filteredWorks = works.filter(work => work.categoryId === button.categoryId);
+            generateWorks(filteredWorks);
+         }
+        
+    });
+}) 

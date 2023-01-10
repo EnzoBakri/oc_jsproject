@@ -55,7 +55,8 @@ body {
 }
 header {
 	display: flex;
-	flex-direction: column;
+	justify-content: space-between;
+	margin: 50px 0;
 }
 section {
 	margin: 50px 0
@@ -278,7 +279,7 @@ footer nav ul {
 	margin: 2em
 }
 
-.edit {
+/* .edit {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -289,23 +290,17 @@ footer nav ul {
 	align-items: center;
 	color: #FFFFFF;
 	background-color: #000000;
-}
+} */
 
-.header {
-	display: flex;
-	justify-content: space-between;
-	margin: 50px 0 50px 0;
-}
-
-.edit-container {
+/* .edit-container {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
 	width: 367px;
 	height: 38px;
-}
+} */
 
-.edit-container a {
+/* .edit-container a {
 	background-color: #FFFFFF;
 	width: 216px;
 	height: 100%;
@@ -317,4 +312,4 @@ footer nav ul {
 	border-radius: 60px;
 	cursor: pointer;
 	font-weight: 600;
-}
+} */
