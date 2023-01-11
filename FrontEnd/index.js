@@ -55,9 +55,7 @@ buttons.forEach(button => {
 })
 
 const auth = window.localStorage.getItem("token");
-if (auth === null) {
-    console.log("test");
-} else {
+if (auth !== null) {
     document.querySelector(".edit").style.display = "flex";
     document.querySelector(".header").style.margin= "100px 0 50px 0";
     document.querySelector(".edit-intro-image").style.display="flex";
