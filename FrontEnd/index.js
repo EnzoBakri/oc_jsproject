@@ -14,12 +14,12 @@ function generateWorks(works) {
         const imageElement = document.createElement("img");
         imageElement.src = article.imageUrl;
         imageElement.crossOrigin = "Anonymous";
-        const nomElement = document.createElement("figcaption");
-        nomElement.innerText = article.title;
+        const nameElement = document.createElement("figcaption");
+        nameElement.innerText = article.title;
         // On rattache les éléments à leur parent
         divGallery.appendChild(workElement);
         workElement.appendChild(imageElement);
-        workElement.appendChild(nomElement);
+        workElement.appendChild(nameElement);
     }
 }
 
@@ -52,4 +52,15 @@ buttons.forEach(button => {
          }
         
     });
-}) 
+})
+
+const auth = window.localStorage.getItem("token");
+if (auth === null) {
+    console.log("test");
+} else {
+    document.querySelector(".edit").style.display = "flex";
+    document.querySelector(".header").style.margin= "100px 0 50px 0";
+    document.querySelector(".edit-intro-image").style.display="flex";
+    document.querySelector(".edit-intro-description").style.display="flex";
+    document.querySelector(".edit-portfolio").style.display="flex";
+}

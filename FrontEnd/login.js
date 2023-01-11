@@ -17,21 +17,25 @@ async function basicLogin() {
         const payload = JSON.stringify(user);
         
         // Appel de la fonction fetch avec toutes les informations nécessaires
-        const response = await fetch("http://localhost:5678/api/users/login", {
-            method: "POST", 
-            headers: { "Content-Type": "application/json" },
-            body: payload
-        });
-
-        if(response.status !== 200) {
-            window.location.reload();
-            alert("Incorrect credentials");
-            return null;
-        } else {
-            const result = await response.json();
-            window.localStorage.setItem("Token", result.token);
-            window.location="index.html";
-            alert("Successfully connected"); 
+        try {
+            const response = await fetch("http://localhost:5678/api/users/login", {
+                method: "POST", 
+                headers: { "Content-Type": "application/json" },
+                body: payload
+            });
+    
+            if(response.status !== 200) {
+                window.location.reload();
+                alert("Incorrect credentials");
+                return null;
+            } else {
+                const result = await response.json();
+                window.localStorage.setItem("token", result.token);
+                window.location="index.html";
+                alert("Successfully connected"); 
+            }
+        } catch(error) {
+            console.error(error);
         }
     });
 }
