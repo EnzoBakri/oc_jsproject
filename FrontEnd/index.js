@@ -56,9 +56,9 @@ buttons.forEach(button => {
 
 const auth = window.localStorage.getItem("token");
 if (auth !== null) {
-    document.querySelector(".edit").style.display = "flex";
-    document.querySelector(".header").style.margin= "100px 0 50px 0";
-    document.querySelector(".edit-intro-image").style.display="flex";
-    document.querySelector(".edit-intro-description").style.display="flex";
-    document.querySelector(".edit-portfolio").style.display="flex";
+    document.querySelector("#edit").style.display = null;
+    document.querySelector("header").style.margin= "100px 0 50px 0";
+    document.querySelector("#edit-intro-image").style.display= null;
+    document.querySelector("#edit-intro-description").style.display= null;
+    document.querySelector("#edit-portfolio").style.display= null;
 }

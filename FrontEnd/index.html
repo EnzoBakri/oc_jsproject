@@ -12,13 +12,13 @@
 	<script src="https://kit.fontawesome.com/6bef5837e3.js" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div class="edit" style="display: none;">
-		<div class="edit-wrapper">
-			<div class="edit-wrapper-desc">
+	<div id="edit" style="display: none;">
+		<div id="edit-wrapper">
+			<div id="edit-wrapper-desc">
 				<i class="fa-regular fa-pen-to-square"></i>
 				<p>Mode édition</p>
 			</div>
-			<a href="#">publier les changements</a>
+			<a href="#edit-modal" class="js-modal">publier les changements</a>
 		</div>
 	</div>
 	<header class="header">
@@ -34,16 +34,29 @@
 	</header>
 	<main>
 
+		<aside id="edit-modal" class="modal" style="display: none;">
+			<div class="modal-wrapper">
+				<div class="modal-wrapper-title">
+					<h2>Galerie photo</h2>
+				</div>
+				<div class="modal-wrapper-container">
+				</div>
+				<hr>
+				<button>Ajouter une photo</button>
+				<a href="#">Supprimer la galerie</a>
+			</div>
+		</aside>
+
 		<section id="introduction">
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="">
-				<a href="#" class="edit-intro-image" style="display: none;">
+				<a href="#edit-modal" id="edit-intro-image" class="js-modal" style="display: none;">
 					<i class="fa-regular fa-pen-to-square"></i>
 					<p>modifier</p>
 				</a>
 			</figure>
 			<article>
-				<a href="#" class="edit-intro-description" style="display: none;">
+				<a href="#edit-modal" id="edit-intro-description" class="js-modal" style="display: none;">
 					<i class="fa-regular fa-pen-to-square"></i>
 					<p>modifier</p>
 				</a>
@@ -55,9 +68,9 @@
 		</section>
 
 		<section id="portfolio">
-			<div class="portfolio-title">
+			<div id="portfolio-title">
 				<h2>Mes Projets</h2>
-				<a href="#" class="edit-portfolio" style="display: none;">
+				<a href="#edit-modal" id="edit-portfolio" class="js-modal" style="display: none;">
 					<i class="fa-regular fa-pen-to-square"></i>
 					<p>modifier</p>
 				</a>
@@ -97,6 +110,8 @@
 	</footer>
 
 	<script type="module" src="index.js"></script>
+	<script type="module" src="modal.js"></script>
+	
 </body>
 </body>
 </html>
