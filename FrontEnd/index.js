@@ -71,15 +71,64 @@ if (auth !== null) {
 })
 }
 
-
-
+let modal = null;
 
 const openModal = function (e) {
     e.preventDefault();
-    const target = document.querySelector(e.target.getAttribute('href'));
-    target.style.display = null;
+    modal = document.querySelector(e.target.getAttribute('href'));
+    modal.style.display = null;
+    modal.removeAttribute('aria-hidden');
+    modal.setAttribute('aria-modal', 'true');
+    modal.addEventListener('click', closeModal);
+    modal.querySelector('.js-modal-close').addEventListener('click', closeModal);
+    modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
+}
+
+const closeModal = function (e) {
+    if (modal === null) return
+    e.preventDefault();
+    modal.style.display = "none";
+    modal.setAttribute('aria-hidden', 'true');
+    modal.removeAttribute('aria-modal');
+    modal.removeEventListener('click', closeModal);
+    modal.querySelector('.js-modal-close').removeEventListener('click', closeModal);
+    modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation);
+    modal = null;
+}
+
+const stopPropagation = function (e) {
+    e.stopPropagation();
 }
 
 document.querySelectorAll('.js-modal').forEach(a => {
     a.addEventListener('click', openModal);
 })
+
+window.addEventListener('keydown', function (e) {
+    if (e.key === "Escape" || e.key === "Esc") {
+        closeModal(e);
+    }
+})
+
+function generateWorksModal(works) {
+    for (let i = 0; i < works.length; i++) {
+
+        const article = works[i];
+        // Récupération de l'élément du DOM qui accueillera les travaux
+        const divModal = document.querySelector(".modal-wrapper-container");
+        // Création d'une balise dédiée à un projet
+        const modalElement = document.createElement("figure");
+        // Création des balises
+        const imageModal = document.createElement("img");
+        imageModal.src = article.imageUrl;
+        imageModal.crossOrigin = "Anonymous";
+        const editModal = document.createElement("p");
+        editModal.innerText = "éditer";
+        // On rattache les éléments à leur parent
+        divModal.appendChild(modalElement);
+        modalElement.appendChild(imageModal);
+        modalElement.appendChild(editModal);
+    }
+}
+
+generateWorksModal(works);

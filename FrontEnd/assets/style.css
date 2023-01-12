@@ -381,25 +381,23 @@ footer nav ul {
 }
 
 .modal-wrapper {
-	overflow: auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: space-between;
 	width: 630px;
 	max-width: calc(100vw - 20px);
 	max-height: calc(100vh - 20px);
 	height: 731px;
 	background-color: #FFFFFF;
 	border-radius: 10px;
+	padding: 40px;
+	box-sizing: border-box;
 }
 
 .modal-wrapper-icon {
 	display: flex;
-	align-items: flex-end;
 	justify-content: flex-end;
-	width: 85%;
-	height: 50px;
+	width: 100%;
 }
 
 .modal-wrapper-icon i {
@@ -410,9 +408,11 @@ footer nav ul {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	width: 100%;
 	height: 30px;
-	margin: 50px auto;
+	margin-top: 30px;
 }
+
 .modal-wrapper-title h2 {
 	font-family: 'Work Sans';
 	font-style: normal;
@@ -425,18 +425,26 @@ footer nav ul {
 .modal-wrapper-container {
 	display: flex;
 	flex-flow: row wrap;
-	align-items: center;
+	align-content: space-between;
 	justify-content: space-between;
-	width: 70%;
-	height: 363px;
-	border: 1px solid #000000;
-	margin-bottom: 47px;
+	width: 75%;
+	height: 100%;
+	margin-top: 30px;
+}
+
+.modal-wrapper-container figure {
+	width: 18%;
+	margin-bottom: 10px;
+}
+
+.modal-wrapper-container img {
+	width: 100%;
 }
 
 .modal-wrapper hr {
 	border: 1px solid #B3B3B3;
 	width: 420px;
-	margin-bottom: 38px;
+	margin-top: 30px;
 }
 
 .modal-wrapper button {
@@ -448,7 +456,8 @@ footer nav ul {
 	font-weight: 700;
 	font-size: 14px;
 	line-height: 17px;
-	margin-bottom: 23px;
+	margin-top: 25px;
+	width: 35%;
 }
 
 .modal-wrapper a {
@@ -457,5 +466,5 @@ footer nav ul {
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 17px;
-	margin-bottom: 48px;
+	margin-top: 20px;
 }
