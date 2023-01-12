@@ -30,7 +30,7 @@ async function basicLogin() {
                 return null;
             } else {
                 const result = await response.json();
-                window.localStorage.setItem("token", result.token);
+                window.sessionStorage.setItem("token", result.token);
                 window.location="index.html";
                 alert("Successfully connected"); 
             }

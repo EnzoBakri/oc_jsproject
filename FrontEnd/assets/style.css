@@ -363,6 +363,11 @@ footer nav ul {
 	text-decoration: none;
 }
 
+#edit-portfolio a {
+	color: #000000;
+	text-decoration: none;
+}
+
 .modal {
 	position: fixed;
 	display: flex;
@@ -387,6 +392,18 @@ footer nav ul {
 	height: 731px;
 	background-color: #FFFFFF;
 	border-radius: 10px;
+}
+
+.modal-wrapper-icon {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	width: 85%;
+	height: 50px;
+}
+
+.modal-wrapper-icon i {
+	cursor: pointer;
 }
 
 .modal-wrapper-title {

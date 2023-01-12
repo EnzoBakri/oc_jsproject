@@ -54,11 +54,32 @@ buttons.forEach(button => {
     });
 })
 
-const auth = window.localStorage.getItem("token");
+const auth = window.sessionStorage.getItem("token");
 if (auth !== null) {
     document.querySelector("#edit").style.display = null;
     document.querySelector("header").style.margin= "100px 0 50px 0";
+    document.querySelector(".js-logout").innerHTML="logout";
     document.querySelector("#edit-intro-image").style.display= null;
     document.querySelector("#edit-intro-description").style.display= null;
     document.querySelector("#edit-portfolio").style.display= null;
+
+    const logout = document.querySelector(".js-logout");
+    logout.addEventListener("click", function (e) {
+    e.preventDefault();
+    window.sessionStorage.removeItem("token");
+    window.location ="login.html";
+})
 }
+
+
+
+
+const openModal = function (e) {
+    e.preventDefault();
+    const target = document.querySelector(e.target.getAttribute('href'));
+    target.style.display = null;
+}
+
+document.querySelectorAll('.js-modal').forEach(a => {
+    a.addEventListener('click', openModal);
+})

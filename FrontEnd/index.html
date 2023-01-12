@@ -12,6 +12,7 @@
 	<script src="https://kit.fontawesome.com/6bef5837e3.js" crossorigin="anonymous"></script>
 </head>
 <body>
+	<!-- Edit -->
 	<div id="edit" style="display: none;">
 		<div id="edit-wrapper">
 			<div id="edit-wrapper-desc">
@@ -21,23 +22,28 @@
 			<a href="#edit-modal" class="js-modal">publier les changements</a>
 		</div>
 	</div>
+	<!-- Header -->
 	<header class="header">
 		<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 		<nav>
 			<ul>
 				<li><a href="index.html">projets</a></li>
-				<li>contact</li>
-				<li><a href="login.html">login</a></li>
+				<li><a href="#">contact</a></li>
+				<li><a href="login.html" class="js-logout">login</a></li>
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
 	</header>
+	<!-- Main -->
 	<main>
-
-		<aside id="edit-modal" class="modal" style="display: none;">
+		<!-- Modal -->
+		<aside id="edit-modal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="titlemodal" style="display: none;">
 			<div class="modal-wrapper">
+				<div class="modal-wrapper-icon">
+					<i class="fa-solid fa-xmark fa-lg"></i>
+				</div>
 				<div class="modal-wrapper-title">
-					<h2>Galerie photo</h2>
+					<h2 id="titlemodal">Galerie photo</h2>
 				</div>
 				<div class="modal-wrapper-container">
 				</div>
@@ -46,17 +52,17 @@
 				<a href="#">Supprimer la galerie</a>
 			</div>
 		</aside>
-
+		<!-- Intro -->
 		<section id="introduction">
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="">
-				<a href="#edit-modal" id="edit-intro-image" class="js-modal" style="display: none;">
+				<a href="#" id="edit-intro-image" style="display: none;">
 					<i class="fa-regular fa-pen-to-square"></i>
 					<p>modifier</p>
 				</a>
 			</figure>
 			<article>
-				<a href="#edit-modal" id="edit-intro-description" class="js-modal" style="display: none;">
+				<a href="#" id="edit-intro-description" style="display: none;">
 					<i class="fa-regular fa-pen-to-square"></i>
 					<p>modifier</p>
 				</a>
@@ -66,14 +72,14 @@
 				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 			</article>
 		</section>
-
+		<!-- Portfolio -->
 		<section id="portfolio">
 			<div id="portfolio-title">
 				<h2>Mes Projets</h2>
-				<a href="#edit-modal" id="edit-portfolio" class="js-modal" style="display: none;">
+				<div id="edit-portfolio" style="display: none;">
 					<i class="fa-regular fa-pen-to-square"></i>
-					<p>modifier</p>
-				</a>
+					<a href="#edit-modal" class="js-modal">modifier</a>
+				</div>
 			</div>
 			<div id="filters">
 				<button id="all">Tous</button>
@@ -84,7 +90,7 @@
 			<div class="gallery">
 			</div>
 		</section>
-
+		<!-- Contact -->
 		<section id="contact">
 			<h2>Contact</h2>
 			<p>Vous avez un projet ? Discutons-en !</p>
@@ -100,7 +106,7 @@
 		</section>
 		
 	</main>
-
+	<!-- Footer -->
 	<footer>
 		<nav>
 			<ul>
@@ -108,9 +114,9 @@
 			</ul>
 		</nav>
 	</footer>
-	
+	<!-- Scripts -->
 	<script type="module" src="index.js"></script>
 
 </body>
-</body>
+
 </html>
