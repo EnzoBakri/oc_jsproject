@@ -441,6 +441,11 @@ footer nav ul {
 	width: 100%;
 }
 
+.modal-wrapper-container p {
+	position: relative;
+	bottom: 20px;
+}
+
 .modal-wrapper hr {
 	border: 1px solid #B3B3B3;
 	width: 420px;
@@ -467,4 +472,29 @@ footer nav ul {
 	font-size: 14px;
 	line-height: 17px;
 	margin-top: 20px;
+}
+
+.modal-icons {
+	position: relative;
+	bottom: 97px;
+	right: 3px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.modal-icons i {
+	background-color: #000000;
+	color: #FFFFFF;
+	padding: 9px 5px;
+	margin-left: 5px;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.modal-icons i[class="fa-solid fa-arrows-up-down-left-right fa-xs"] {
+	display: none;
+}
+
+#figureModal:hover #crossIconModal {
+	display: block;
 }

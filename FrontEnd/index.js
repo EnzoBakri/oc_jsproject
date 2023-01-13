@@ -118,16 +118,33 @@ function generateWorksModal(works) {
         const divModal = document.querySelector(".modal-wrapper-container");
         // Création d'une balise dédiée à un projet
         const modalElement = document.createElement("figure");
+        modalElement.id = "figureModal";
         // Création des balises
         const imageModal = document.createElement("img");
         imageModal.src = article.imageUrl;
         imageModal.crossOrigin = "Anonymous";
+
+        const divIcons = document.createElement("div");
+        divIcons.setAttribute("class", "modal-icons");
+
+        const trashIcon = document.createElement("i");
+        trashIcon.setAttribute("class", "fa-solid fa-trash-can fa-xs");
+
+        const crossIcon = document.createElement("i");
+        crossIcon.setAttribute("class", "fa-solid fa-arrows-up-down-left-right fa-xs");
+        crossIcon.id = "crossIconModal";
+
         const editModal = document.createElement("p");
         editModal.innerText = "éditer";
+
         // On rattache les éléments à leur parent
         divModal.appendChild(modalElement);
         modalElement.appendChild(imageModal);
+        modalElement.appendChild(divIcons);
+        divIcons.appendChild(crossIcon);
+        divIcons.appendChild(trashIcon);
         modalElement.appendChild(editModal);
+
     }
 }
 
