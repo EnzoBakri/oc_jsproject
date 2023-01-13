@@ -119,6 +119,7 @@ function generateWorksModal(works) {
         // Création d'une balise dédiée à un projet
         const modalElement = document.createElement("figure");
         modalElement.id = "figureModal";
+        modalElement.classList.add("js-figureModal");
         // Création des balises
         const imageModal = document.createElement("img");
         imageModal.src = article.imageUrl;
@@ -149,3 +150,34 @@ function generateWorksModal(works) {
 }
 
 generateWorksModal(works);
+
+const removeItem = async function (id) {
+
+    const deleteMethod = {
+        method: "DELETE",
+        headers: { 
+            Authorization: `Bearer ${sessionStorage["token"]}`, 
+            "Content-Type": "application/json" 
+        },
+    }
+
+    try {
+        const response = await fetch(`http://localhost:5678/api/works/${id}`, deleteMethod)
+        if (response.ok) {
+            const element = document.querySelector(".modal-wrapper-container")
+            const newElement = document.querySelector(".js-figureModal")
+            element.removeChild(newElement)
+            console.log("HTTP request successful")
+        } else {
+            console.log("HTTP request unsuccessful")
+        }
+        console.log(response)
+    
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+document.querySelectorAll(".fa-trash-can").forEach(i => {
+    i.addEventListener('click', removeItem)
+})
