@@ -130,6 +130,7 @@ function generateWorksModal(works) {
 
         const trashIcon = document.createElement("i");
         trashIcon.setAttribute("class", "fa-solid fa-trash-can fa-xs");
+        trashIcon.dataset.id = article.id;
 
         const crossIcon = document.createElement("i");
         crossIcon.setAttribute("class", "fa-solid fa-arrows-up-down-left-right fa-xs");
@@ -151,33 +152,28 @@ function generateWorksModal(works) {
 
 generateWorksModal(works);
 
-const removeItem = async function (id) {
-
-    const deleteMethod = {
-        method: "DELETE",
-        headers: { 
-            Authorization: `Bearer ${sessionStorage["token"]}`, 
-            "Content-Type": "application/json" 
-        },
-    }
-
-    try {
-        const response = await fetch(`http://localhost:5678/api/works/${id}`, deleteMethod)
-        if (response.ok) {
-            const element = document.querySelector(".modal-wrapper-container")
-            const newElement = document.querySelector(".js-figureModal")
-            element.removeChild(newElement)
-            console.log("HTTP request successful")
-        } else {
-            console.log("HTTP request unsuccessful")
-        }
-        console.log(response)
+function removeItems() {
     
-    } catch (error) {
-        console.log(error)
+    const deleteIcons = document.querySelectorAll(".fa-trash-can");
+
+    for (let i = 0; i < deleteIcons.length; i++) {
+        deleteIcons[i].addEventListener("click", async function (event) {
+            const id = event.target.dataset.id;
+            const deleteMethod = {
+                method: "DELETE",
+                headers: { 
+                    Authorization: `Bearer ${sessionStorage["token"]}`, 
+                    "Content-Type": "application/json" 
+                },
+            }
+            try {
+                const response = await fetch(`http://localhost:5678/api/works/${id}`, deleteMethod);
+                return response
+            } catch (error) {
+                console.log(error);
+            }
+        });
     }
 }
 
-document.querySelectorAll(".fa-trash-can").forEach(i => {
-    i.addEventListener('click', removeItem)
-})
+removeItems();
