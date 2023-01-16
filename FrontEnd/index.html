@@ -41,15 +41,40 @@
 			<div class="modal-wrapper js-modal-stop">
 				<div class="modal-wrapper-icon">
 					<i class="fa-solid fa-xmark fa-lg js-modal-close"></i>
+					<i class="fa-solid fa-arrow-left fa-lg" style="display: none;"></i>
 				</div>
 				<div class="modal-wrapper-title">
 					<h2 id="titlemodal">Galerie photo</h2>
 				</div>
 				<div class="modal-wrapper-container">
 				</div>
-				<hr>
+				<div class="modal2-wrapper-container">
+					<div class="add-photo-container">
+						<i class="fa-regular fa-image fa-5x"></i>
+						<a href="#" download="#" id="modal-addLink">+ Ajouter photo</a>
+						<p>jpg, png : 4mo max</p>
+					</div>
+					<form method="post" id="add-form">
+						<div class="form-column">
+							<label for="title">Titre</label>
+							<input type="text" name="title" id="title">
+						</div>
+						<div class="form-column" id="form-column-select">
+							<label for="category">Catégorie</label>
+							<select name="category" id="category">
+								<option value="">--Please choose a category--</option>
+								<option value="objects">Object</option>
+								<option value="apartment">Apartment</option>
+								<option value="hotel-restaurant">Bar & Restaurant</option>
+							</select>
+						</div>
+						<hr>
+						<input type="submit" value="Valider">
+					</form>
+				</div>
+				<hr id="js-hrTag" style="display: flex;">
 				<button>Ajouter une photo</button>
-				<a href="#">Supprimer la galerie</a>
+				<a href="#" id="modal-Deletelink">Supprimer la galerie</a>
 			</div>
 		</aside>
 		<!-- Intro -->

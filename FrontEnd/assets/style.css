@@ -138,12 +138,15 @@ form {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	height: 300px;
 }
 
 .form-column {
 	display: flex;
 	flex-direction: column;
+}
+
+#form-column-login {
+	margin-top: 20px;
 }
 
 .form-column label {
@@ -160,6 +163,14 @@ form {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	outline: none;
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16px;
+	color: #444444;
+	padding: 18px 16px;
+	box-sizing: border-box;
 }
 
 #login h2 {
@@ -384,6 +395,7 @@ footer nav ul {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: space-between;
 	width: 630px;
 	max-width: calc(100vw - 20px);
 	max-height: calc(100vh - 20px);
@@ -396,7 +408,8 @@ footer nav ul {
 
 .modal-wrapper-icon {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
+	flex-direction: row-reverse;
 	width: 100%;
 }
 
@@ -429,6 +442,89 @@ footer nav ul {
 	justify-content: space-between;
 	width: 75%;
 	margin-top: 30px;
+}
+
+.modal2-wrapper-container {
+	display: none;
+	flex-direction: column;
+	align-content: center;
+	justify-content: center;
+	width: 420px;
+	margin-top: 30px;
+}
+
+.add-photo-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 169px;
+	background-color: #E8F1F6;
+	border-radius: 3px;
+}
+
+.add-photo-container i {
+	color: #B9C5CC;
+}
+
+.add-photo-container p {
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 12px;
+	margin-top: 7px;
+}
+
+#add-form {
+	margin-top: 30px;
+}
+
+#add-form hr {
+	margin-top: 47px;
+}
+
+
+#title {
+	width: 100%;
+}
+
+#form-column-select {
+	margin-top: 20px;
+}
+
+#category {
+	width: 100%;
+	height: 51px;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	outline: none;
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16px;
+	color: #444444;
+	padding: 18px 16px;
+	box-sizing: border-box;
+}
+
+#modal-addLink {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	width: 173px;
+	height: 36px;
+	border-radius: 50px;
+	background-color: #CBD6DC;
+	color: #306685;
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
 }
 
 .modal-wrapper-container figure {
