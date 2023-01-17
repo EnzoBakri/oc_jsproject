@@ -257,7 +257,7 @@ async function submitForm() {
 
   formAdd.addEventListener("submit", async function (event) {
     event.preventDefault();
-
+    event.stopPropagation();
     // Récupération des valeurs des champs de formualire
     var fileInput = document.getElementById("file");
     var title = document.getElementById("title");
@@ -269,24 +269,21 @@ async function submitForm() {
     formData.append("title", title.value);
     formData.append("category", selectedOption);
 
-    // Récupératon du token d'authentification
     var token = window.sessionStorage.getItem("token");
 
     try {
       const response = await fetch("http://localhost:5678/api/works", {
         method: "POST",
         headers: {
-          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
         },
         body: formData,
       });
-
-      console.log(response);
       const data = await response.json();
       console.log("Success:", data);
     } catch (error) {
-      console.error("Error:", error);
+      console.log(error);
     }
   });
 }
