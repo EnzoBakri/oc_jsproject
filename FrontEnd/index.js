@@ -2,21 +2,25 @@
 const reponse = await fetch('http://localhost:5678/api/works');
 const works = await reponse.json();
 
+// Generate project in gallery
+
 function generateWorks(works) {
     for (let i = 0; i < works.length; i++) {
 
         const article = works[i];
-        // Récupération de l'élément du DOM qui accueillera les travaux
+
         const divGallery = document.querySelector(".gallery");
-        // Création d'une balise dédiée à un projet
+
         const workElement = document.createElement("figure");
-        // Création des balises
+
         const imageElement = document.createElement("img");
         imageElement.src = article.imageUrl;
+        imageElement.setAttribute("alt", "Sophie Bluel image of her project")
         imageElement.crossOrigin = "Anonymous";
+        
         const nameElement = document.createElement("figcaption");
         nameElement.innerText = article.title;
-        // On rattache les éléments à leur parent
+
         divGallery.appendChild(workElement);
         workElement.appendChild(imageElement);
         workElement.appendChild(nameElement);
@@ -24,6 +28,8 @@ function generateWorks(works) {
 }
 
 generateWorks(works);
+
+// Filter
 
 const buttons = [{
     id: 'all',
@@ -54,6 +60,8 @@ buttons.forEach(button => {
     });
 })
 
+// Edit Mod
+
 const auth = window.sessionStorage.getItem("token");
 if (auth !== null) {
     document.querySelector("#edit").style.display = null;
@@ -70,6 +78,8 @@ if (auth !== null) {
     window.location ="login.html";
 })
 }
+
+// Open-Close Modal
 
 let modal = null;
 
@@ -110,17 +120,19 @@ window.addEventListener('keydown', function (e) {
     }
 })
 
+// Generate project in modal
+
 function generateWorksModal(works) {
     for (let i = 0; i < works.length; i++) {
 
         const article = works[i];
-        // Récupération de l'élément du DOM qui accueillera les travaux
+
         const divModal = document.querySelector(".modal-wrapper-container");
-        // Création d'une balise dédiée à un projet
+
         const modalElement = document.createElement("figure");
         modalElement.id = "figureModal";
         modalElement.classList.add("js-figureModal");
-        // Création des balises
+
         const imageModal = document.createElement("img");
         imageModal.src = article.imageUrl;
         imageModal.crossOrigin = "Anonymous";
@@ -139,7 +151,6 @@ function generateWorksModal(works) {
         const editModal = document.createElement("p");
         editModal.innerText = "éditer";
 
-        // On rattache les éléments à leur parent
         divModal.appendChild(modalElement);
         modalElement.appendChild(imageModal);
         modalElement.appendChild(divIcons);
@@ -151,6 +162,8 @@ function generateWorksModal(works) {
 }
 
 generateWorksModal(works);
+
+// Remove projects
 
 function removeItems() {
     
@@ -178,6 +191,8 @@ function removeItems() {
 
 removeItems();
 
+// Switch Modal
+
 const leftArrowIcon = document.querySelector(".fa-arrow-left");
 const modalWrapperIcons = document.querySelector(".modal-wrapper-icon");
 const modalWrapperTitle = document.querySelector(".modal-wrapper-title h2");
@@ -187,7 +202,6 @@ const modalButton = document.querySelector(".modal-wrapper button");
 const modalLink = document.getElementById("modal-Deletelink");
 const modalWrapper = document.querySelector(".modal-wrapper");
 const modalWrapperHrTag = document.getElementById("js-hrTag");
-
 
 modalButton.addEventListener("click", function (event) {
     event.preventDefault();
@@ -210,4 +224,3 @@ leftArrowIcon.addEventListener("click", function (event) {
         modalButton.style.display = "flex";
         modalWrapperHrTag.style.display = "flex";
 });
-       
