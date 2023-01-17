@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "db": "cp -r database_save.sqlite database.sqlite"
   },
   "author": "",
   "license": "ISC",
