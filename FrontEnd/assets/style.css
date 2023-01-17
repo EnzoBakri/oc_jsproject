@@ -479,6 +479,13 @@ footer nav ul {
 	color: #B9C5CC;
 }
 
+.add-photo-container img {
+	width: 129px;
+	height: 100%;
+	object-fit: cover;
+	box-sizing: border-box;
+}
+
 .add-photo-container p {
 	font-family: 'Work Sans';
 	font-style: normal;

@@ -224,3 +224,49 @@ leftArrowIcon.addEventListener("click", function (event) {
         modalButton.style.display = "flex";
         modalWrapperHrTag.style.display = "flex";
 });
+
+// Add project
+
+async function submitForm() {
+
+    const formAdd = document.getElementById("add-form");
+
+    formAdd.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        // Récupération des valeurs des champs de formualire
+        var fileInput = document.getElementById("file");
+        var title = document.getElementById("title");
+        var select = document.getElementById("category");
+        var selectedOption = select.options[select.selectedIndex].value;
+
+        var formData = new FormData();
+        formData.append("image", fileInput.files[0]);
+        formData.append("title", title.value);
+        formData.append("category", selectedOption);
+
+        var token = window.sessionStorage.getItem("token");
+
+        try {
+
+            const response = await fetch("http://localhost:5678/api/works", {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: formData
+            });
+
+            // console.log(response);
+            const data = await response.json();
+            console.log("Success:", data);
+
+        } catch (error) {
+            console.error("Error:", error);
+        }
+
+    });
+}
+
+submitForm();

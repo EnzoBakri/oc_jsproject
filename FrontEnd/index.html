@@ -54,9 +54,10 @@
 				</div>
 				<!-- Add project -->
 				<div class="modal2-wrapper-container">
-					<form method="post" id="add-form">
+					<form method="post" action ="" id="add-form">
 						<div class="add-photo-container">
 							<i class="fa-regular fa-image fa-5x"></i>
+							<img id="preview" src="" alt="Image preview" style="display: none;">
 							<label for="file" class="label-file">+ Ajouter photo</label>
 							<input type="file" id="file" class="input-file" name="file" accept=".jpg,.jpeg,.png">
 							<p>jpg, png : 4mo max</p>
@@ -152,7 +153,7 @@
 	
 	<!-- Scripts -->
 	<script type="module" src="index.js"></script>
-
+	<script src="preview.js"></script>
 </body>
 
 </html>
