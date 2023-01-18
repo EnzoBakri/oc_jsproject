@@ -133,14 +133,6 @@ window.addEventListener("keydown", function (e) {
 // Generate project in modal
 
 function generateWorksModal(works) {
-  /*
-    const monTexte = 'Kévin'
-    const maDiv = document.getElementById('root')
-    maDiv.innerHTML = `<div>
-        <p class="maClass">Coucou ${monTexte}</p>
-    </div>
-    `;*/
-
   for (let i = 0; i < works.length; i++) {
     const article = works[i];
 
@@ -252,7 +244,7 @@ leftArrowIcon.addEventListener("click", function (event) {
 
 // Add project
 
-async function submitForm() {
+function submitForm() {
   const formAdd = document.getElementById("add-form");
 
   formAdd.addEventListener("submit", async function (event) {
@@ -275,11 +267,12 @@ async function submitForm() {
       const response = await fetch("http://localhost:5678/api/works", {
         method: "POST",
         headers: {
+          Accept: "multipart/form-data",
           Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
         },
         body: formData,
       });
+      console.log(response);
       const data = await response.json();
       console.log("Success:", data);
     } catch (error) {
