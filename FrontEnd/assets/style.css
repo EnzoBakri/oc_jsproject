@@ -525,6 +525,7 @@ footer nav ul {
 }
 
 .modal-wrapper-container {
+  overflow: scroll;
   display: flex;
   flex-flow: row wrap;
   align-content: space-between;

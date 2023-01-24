@@ -1,10 +1,21 @@
-// Récupération des projets depuis le fichier JSON
-const response = await fetch("http://localhost:5678/api/works");
-const works = await response.json();
+async function getData() {
+  try {
+    const response = await fetch("http://localhost:5678/api/works");
 
-// Generate project in gallery
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      console.log("Failed to get works from server");
+    }
+  } catch (error) {
+    console.log("Error:", error);
+  }
+}
 
-function generateWorks(works) {
+async function generateWorks(worksToDisplay) {
+  const works = worksToDisplay ? worksToDisplay : await getData();
+
   for (let i = 0; i < works.length; i++) {
     const article = works[i];
 
@@ -26,113 +37,62 @@ function generateWorks(works) {
   }
 }
 
-generateWorks(works);
+async function filterWorks(works) {
+  const buttons = [
+    {
+      id: "all",
+      categoryId: null,
+    },
+    {
+      id: "objects",
+      categoryId: 1,
+    },
+    {
+      id: "apartment",
+      categoryId: 2,
+    },
+    {
+      id: "hotel-restaurant",
+      categoryId: 3,
+    },
+  ];
 
-// Filter
-
-const buttons = [
-  {
-    id: "all",
-    categoryId: null,
-  },
-  {
-    id: "objects",
-    categoryId: 1,
-  },
-  {
-    id: "apartment",
-    categoryId: 2,
-  },
-  {
-    id: "hotel-restaurant",
-    categoryId: 3,
-  },
-];
-
-buttons.forEach((button) => {
-  const buttonElement = document.getElementById(button.id);
-  buttonElement.addEventListener("click", function () {
-    document.querySelector(".gallery").innerHTML = "";
-    if (button.categoryId === null) {
-      generateWorks(works);
-    } else {
-      const filteredWorks = works.filter(
-        (work) => work.categoryId === button.categoryId
-      );
-      generateWorks(filteredWorks);
-    }
-  });
-});
-
-// Edit Mod
-
-const auth = window.sessionStorage.getItem("token");
-if (auth !== null) {
-  document.querySelector("#edit").style.display = null;
-  document.querySelector("header").style.margin = "100px 0 50px 0";
-  document.querySelector(".js-logout").innerHTML = "logout";
-  document.querySelector("#edit-intro-image").style.display = null;
-  document.querySelector("#edit-intro-description").style.display = null;
-  document.querySelector("#edit-portfolio").style.display = null;
-
-  const logout = document.querySelector(".js-logout");
-  logout.addEventListener("click", function (e) {
-    e.preventDefault();
-    window.sessionStorage.removeItem("token");
-    window.location = "login.html";
+  buttons.forEach((button) => {
+    const buttonElement = document.getElementById(button.id);
+    buttonElement.addEventListener("click", function () {
+      document.querySelector(".gallery").innerHTML = "";
+      if (button.categoryId === null) {
+        generateWorks();
+      } else {
+        const filteredWorks = works.filter(
+          (work) => work.categoryId === button.categoryId
+        );
+        generateWorks(filteredWorks);
+      }
+    });
   });
 }
 
-// Open-Close Modal
+function initEditMod() {
+  const auth = window.sessionStorage.getItem("token");
+  if (auth !== null) {
+    document.querySelector("#edit").style.display = null;
+    document.querySelector("header").style.margin = "100px 0 50px 0";
+    document.querySelector(".js-logout").innerHTML = "logout";
+    document.querySelector("#edit-intro-image").style.display = null;
+    document.querySelector("#edit-intro-description").style.display = null;
+    document.querySelector("#edit-portfolio").style.display = null;
 
-let modal = null;
-
-const openModal = function (e) {
-  e.preventDefault();
-  modal = document.querySelector(e.target.getAttribute("href"));
-  modal.style.display = null;
-  modal.removeAttribute("aria-hidden");
-  modal.setAttribute("aria-modal", "true");
-  modal.addEventListener("click", closeModal);
-  modal.querySelector(".js-modal-close").addEventListener("click", closeModal);
-  modal
-    .querySelector(".js-modal-stop")
-    .addEventListener("click", stopPropagation);
-};
-
-const closeModal = function (e) {
-  if (modal === null) return;
-  e.preventDefault();
-  modal.style.display = "none";
-  modal.setAttribute("aria-hidden", "true");
-  modal.removeAttribute("aria-modal");
-  modal.removeEventListener("click", closeModal);
-  modal
-    .querySelector(".js-modal-close")
-    .removeEventListener("click", closeModal);
-  modal
-    .querySelector(".js-modal-stop")
-    .removeEventListener("click", stopPropagation);
-  modal = null;
-};
-
-const stopPropagation = function (e) {
-  e.stopPropagation();
-};
-
-document.querySelectorAll(".js-modal").forEach((a) => {
-  a.addEventListener("click", openModal);
-});
-
-window.addEventListener("keydown", function (e) {
-  if (e.key === "Escape" || e.key === "Esc") {
-    closeModal(e);
+    const logout = document.querySelector(".js-logout");
+    logout.addEventListener("click", function (e) {
+      e.preventDefault();
+      window.sessionStorage.removeItem("token");
+      window.location = "login.html";
+    });
   }
-});
+}
 
-// Generate project in modal
-
-function generateWorksModal(works) {
+async function generateWorksModal(works) {
   for (let i = 0; i < works.length; i++) {
     const article = works[i];
 
@@ -172,15 +132,11 @@ function generateWorksModal(works) {
   }
 }
 
-generateWorksModal(works);
-
-// Remove projects
-
 function removeItems() {
   const deleteIcons = document.querySelectorAll(".fa-trash-can");
-
   for (let i = 0; i < deleteIcons.length; i++) {
     deleteIcons[i].addEventListener("click", async function (event) {
+      event.preventDefault();
       const id = event.target.dataset.id;
       const deleteMethod = {
         method: "DELETE",
@@ -194,7 +150,13 @@ function removeItems() {
           `http://localhost:5678/api/works/${id}`,
           deleteMethod
         );
-        return response;
+        if (response.ok) {
+          const result = await response.json();
+          console.log("Success: ", result);
+          return result;
+        } else {
+          console.log("Error with deleting work");
+        }
       } catch (error) {
         console.log(error);
       }
@@ -202,83 +164,55 @@ function removeItems() {
   }
 }
 
-removeItems();
-
-// Switch Modal
-
-const leftArrowIcon = document.querySelector(".fa-arrow-left");
-const modalWrapperIcons = document.querySelector(".modal-wrapper-icon");
-const modalWrapperTitle = document.querySelector(".modal-wrapper-title h2");
-const modalWrapperContainer = document.querySelector(
-  ".modal-wrapper-container"
-);
-const modal2WrapperContainer = document.querySelector(
-  ".modal2-wrapper-container"
-);
-const modalButton = document.querySelector(".modal-wrapper button");
-const modalLink = document.getElementById("modal-Deletelink");
-const modalWrapper = document.querySelector(".modal-wrapper");
-const modalWrapperHrTag = document.getElementById("js-hrTag");
-
-modalButton.addEventListener("click", function (event) {
-  event.preventDefault();
-  modalWrapperContainer.style.display = "none";
-  modal2WrapperContainer.style.display = "flex";
-  leftArrowIcon.style.display = null;
-  modalWrapperTitle.innerText = "Ajout photo";
-  modalLink.style.display = "none";
-  modalButton.style.display = "none";
-  modalWrapperHrTag.style.display = "none";
-});
-
-leftArrowIcon.addEventListener("click", function (event) {
-  event.preventDefault();
-  modalWrapperContainer.style.display = null;
-  modal2WrapperContainer.style.display = null;
-  leftArrowIcon.style.display = "none";
-  modalWrapperTitle.innerText = "Galerie photo";
-  modalLink.style.display = null;
-  modalButton.style.display = "flex";
-  modalWrapperHrTag.style.display = "flex";
-});
-
-// Add project
-
 function submitForm() {
-  const formAdd = document.getElementById("add-form");
+  document
+    .getElementById("submit")
+    .addEventListener("click", async function (event) {
+      console.log("test");
+      event.preventDefault();
+      // Récupération des valeurs des champs de formualire
+      const fileInput = document.getElementById("file");
+      const title = document.getElementById("title");
+      const select = document.getElementById("category");
+      const selectedOption = select.options[select.selectedIndex].value;
 
-  formAdd.addEventListener("submit", async function (event) {
-    event.preventDefault();
-    event.stopPropagation();
-    // Récupération des valeurs des champs de formualire
-    var fileInput = document.getElementById("file");
-    var title = document.getElementById("title");
-    var select = document.getElementById("category");
-    var selectedOption = select.options[select.selectedIndex].value;
+      const formData = new FormData();
+      formData.append("image", fileInput.files[0]);
+      formData.append("title", title.value);
+      formData.append("category", selectedOption);
 
-    var formData = new FormData();
-    formData.append("image", fileInput.files[0]);
-    formData.append("title", title.value);
-    formData.append("category", selectedOption);
+      const token = window.sessionStorage.getItem("token");
 
-    var token = window.sessionStorage.getItem("token");
-
-    try {
-      const response = await fetch("http://localhost:5678/api/works", {
-        method: "POST",
-        headers: {
-          Accept: "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
-      console.log(response);
-      const data = await response.json();
-      console.log("Success:", data);
-    } catch (error) {
-      console.log(error);
-    }
-  });
+      try {
+        const response = await fetch("http://localhost:5678/api/works", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        });
+        if (response.ok) {
+          const result = await response.json();
+          console.log("Success: ", result);
+        } else {
+          console.log("Failed to add work");
+        }
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+    });
 }
 
-submitForm();
+async function run() {
+  const works = await getData();
+
+  generateWorks(works);
+  filterWorks(works);
+  initEditMod();
+  generateWorksModal(works);
+  removeItems();
+  submitForm();
+}
+
+run();

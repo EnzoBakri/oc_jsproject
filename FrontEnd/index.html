@@ -65,7 +65,7 @@
           <div class="modal-wrapper-container"></div>
           <!-- Add project -->
           <div class="modal2-wrapper-container">
-            <form method="post" action="" id="add-form">
+            <form id="add-form">
               <div class="add-photo-container">
                 <i class="fa-regular fa-image fa-5x"></i>
                 <img
@@ -98,11 +98,11 @@
                 </select>
               </div>
               <hr />
-              <input type="submit" value="Valider" />
+              <button id="submit">Valider</button>
             </form>
           </div>
           <hr id="js-hrTag" style="display: flex" />
-          <button>Ajouter une photo</button>
+          <button id="add-photo">Ajouter une photo</button>
           <a href="#" id="modal-Deletelink">Supprimer la galerie</a>
         </div>
       </aside>
@@ -162,7 +162,7 @@
       <section id="contact">
         <h2>Contact</h2>
         <p>Vous avez un projet ? Discutons-en !</p>
-        <form action="#" method="post">
+        <form>
           <label for="name">Nom</label>
           <input type="text" name="name" id="name" />
           <label for="email">Email</label>
@@ -185,6 +185,7 @@
 
     <!-- Scripts -->
     <script type="module" src="index.js"></script>
+    <script src="modal.js"></script>
     <script src="preview.js"></script>
   </body>
 </html>
