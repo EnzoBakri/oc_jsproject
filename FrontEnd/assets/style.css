@@ -484,7 +484,7 @@ footer nav ul {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   width: 630px;
   max-width: calc(100vw - 20px);
   max-height: calc(100vh - 20px);
@@ -574,8 +574,17 @@ footer nav ul {
   margin-top: 7px;
 }
 
+#add-form {
+  height: 550px;
+}
+
 #add-form hr {
   margin-top: 47px;
+}
+
+#add-form button {
+  display: flex;
+  align-self: center;
 }
 
 #title {
@@ -677,7 +686,7 @@ footer nav ul {
 
 .modal-icons {
   position: relative;
-  bottom: 97px;
+  bottom: 92px;
   right: 3px;
   display: flex;
   justify-content: flex-end;

@@ -92,7 +92,8 @@ function initEditMod() {
   }
 }
 
-async function generateWorksModal(works) {
+async function generateWorksModal(worksToDisplayModal) {
+  const works = worksToDisplayModal ? worksToDisplayModal : await getData();
   for (let i = 0; i < works.length; i++) {
     const article = works[i];
 
@@ -151,9 +152,11 @@ function removeItems() {
           deleteMethod
         );
         if (response.ok) {
-          const result = await response.json();
-          console.log("Success: ", result);
-          return result;
+          console.log(response);
+          document.querySelector(".gallery").innerHTML = "";
+          document.querySelector(".modal-wrapper-container").innerHTML = "";
+          generateWorks();
+          generateWorksModal();
         } else {
           console.log("Error with deleting work");
         }
@@ -168,7 +171,6 @@ function submitForm() {
   document
     .getElementById("submit")
     .addEventListener("click", async function (event) {
-      console.log("test");
       event.preventDefault();
       // Récupération des valeurs des champs de formualire
       const fileInput = document.getElementById("file");
@@ -195,6 +197,10 @@ function submitForm() {
         if (response.ok) {
           const result = await response.json();
           console.log("Success: ", result);
+          document.querySelector(".gallery").innerHTML = "";
+          document.querySelector(".modal-wrapper-container").innerHTML = "";
+          generateWorks();
+          generateWorksModal();
         } else {
           console.log("Failed to add work");
         }
