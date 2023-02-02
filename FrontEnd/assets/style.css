@@ -106,17 +106,21 @@ nav,
 section {
   display: block;
 }
+
 body {
   line-height: 1;
 }
+
 ol,
 ul {
   list-style: none;
 }
+
 blockquote,
 q {
   quotes: none;
 }
+
 blockquote:before,
 blockquote:after,
 q:before,
@@ -124,10 +128,12 @@ q:after {
   content: "";
   content: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
 /** end reset css**/
 body {
   max-width: 1140px;
@@ -135,11 +141,13 @@ body {
   font-family: "Work Sans";
   font-size: 14px;
 }
+
 header {
   display: flex;
   justify-content: space-between;
   margin: 50px 0;
 }
+
 section {
   margin: 50px 0;
 }
@@ -165,11 +173,13 @@ h2 {
   font-size: 30px;
   color: #1d6154;
 }
+
 nav ul {
   display: flex;
   align-items: center;
   list-style-type: none;
 }
+
 nav li {
   padding: 0 10px;
   font-size: 1.2em;
@@ -210,6 +220,8 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 775px;
   padding: 80px;
 }
 
@@ -252,6 +264,30 @@ form {
   box-sizing: border-box;
 }
 
+.form-column span {
+  position: relative;
+  bottom: 31px;
+  left: 410px;
+  font-size: 16px;
+  color: red;
+}
+
+.fa-circle-check {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+#submit-error {
+  position: relative;
+  bottom: 55px;
+  left: 305px;
+  font-size: 16px;
+  color: red;
+}
+
 #login h2 {
   margin-bottom: 37px;
 }
@@ -266,9 +302,11 @@ form {
   display: flex;
   align-items: center;
 }
+
 #introduction figure {
   flex: 1;
 }
+
 #introduction img {
   display: block;
   margin: auto;
@@ -278,6 +316,7 @@ form {
 #introduction article {
   flex: 1;
 }
+
 #introduction h2 {
   margin-bottom: 1em;
 }
@@ -324,12 +363,15 @@ form {
   width: 50%;
   margin: auto;
 }
+
 #contact > * {
   text-align: center;
 }
+
 #contact h2 {
   margin-bottom: 20px;
 }
+
 #contact form {
   text-align: left;
   margin-top: 30px;
@@ -343,9 +385,11 @@ form {
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 #contact label {
   margin: 2em 0 1em 0;
 }
+
 #contact textarea {
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
@@ -384,7 +428,7 @@ footer nav ul {
   left: 0;
   width: 100%;
   height: 59px;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   background-color: #000000;
@@ -423,7 +467,7 @@ footer nav ul {
 }
 
 #edit-intro-image {
-  display: flex;
+  display: none;
   justify-content: flex-start;
   margin: 10px auto;
   width: 80%;
@@ -436,7 +480,7 @@ footer nav ul {
 }
 
 #edit-intro-description {
-  display: flex;
+  display: none;
   justify-content: space-between;
   width: 15%;
   margin-bottom: 10px;
@@ -453,7 +497,7 @@ footer nav ul {
 }
 
 #edit-portfolio {
-  display: flex;
+  display: none;
   justify-content: space-between;
   align-items: center;
   width: 25%;
@@ -470,7 +514,7 @@ footer nav ul {
 
 .modal {
   position: fixed;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   top: 0;
@@ -504,6 +548,10 @@ footer nav ul {
 
 .modal-wrapper-icon i {
   cursor: pointer;
+}
+
+.modal-wrapper-icon .fa-arrow-left {
+  display: none;
 }
 
 .modal-wrapper-title {
@@ -565,6 +613,10 @@ footer nav ul {
   box-sizing: border-box;
 }
 
+#preview {
+  display: none;
+}
+
 .add-photo-container p {
   font-family: "Work Sans";
   font-style: normal;
@@ -597,6 +649,30 @@ footer nav ul {
 
 #form-column-title {
   margin-top: 20px;
+}
+
+#title-error {
+  bottom: 75px;
+  left: 45px;
+  font-size: 14px;
+}
+
+#option-error {
+  bottom: 75px;
+  left: 78px;
+  font-size: 14px;
+}
+
+#modalSubmit-error {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  /* top: 20px;
+  left: 195px; */
+  color: red;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 #category {
@@ -657,6 +733,7 @@ footer nav ul {
 }
 
 .modal-wrapper hr {
+  display: flex;
   border: 1px solid #b3b3b3;
   width: 420px;
   margin-top: 30px;
@@ -707,4 +784,19 @@ footer nav ul {
 
 #figureModal:hover #crossIconModal {
   display: block;
+}
+
+#connected-message {
+  display: none;
+  position: relative;
+  top: 1px;
+  color: green;
+  font-size: 16px;
+  font-weight: 700;
+  border: 1px solid #008000;
+  padding: 5px;
+}
+
+#add-message {
+  margin-left: 10px;
 }

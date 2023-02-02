@@ -25,7 +25,7 @@ async function generateWorks(worksToDisplay) {
 
     const imageElement = document.createElement("img");
     imageElement.src = article.imageUrl;
-    imageElement.setAttribute("alt", "Sophie Bluel image of her project");
+    imageElement.setAttribute("alt", "Sophie Bluel project");
     imageElement.crossOrigin = "Anonymous";
 
     const nameElement = document.createElement("figcaption");
@@ -75,13 +75,18 @@ async function filterWorks(works) {
 
 function initEditMod() {
   const auth = window.sessionStorage.getItem("token");
+  const connectMsg = document.getElementById("connected-message");
   if (auth !== null) {
-    document.querySelector("#edit").style.display = null;
+    document.getElementById("edit").style.display = "flex";
     document.querySelector("header").style.margin = "100px 0 50px 0";
     document.querySelector(".js-logout").innerHTML = "logout";
-    document.querySelector("#edit-intro-image").style.display = null;
-    document.querySelector("#edit-intro-description").style.display = null;
-    document.querySelector("#edit-portfolio").style.display = null;
+    document.getElementById("edit-intro-image").style.display = "flex";
+    document.getElementById("edit-intro-description").style.display = "flex";
+    document.getElementById("edit-portfolio").style.display = "flex";
+    connectMsg.style.display = "flex";
+    setTimeout(function () {
+      connectMsg.style.display = "none";
+    }, 5000);
 
     const logout = document.querySelector(".js-logout");
     logout.addEventListener("click", function (e) {
@@ -105,6 +110,7 @@ async function generateWorksModal(worksToDisplayModal) {
 
     const imageModal = document.createElement("img");
     imageModal.src = article.imageUrl;
+    imageModal.setAttribute("alt", "Sophie Bluel project");
     imageModal.crossOrigin = "Anonymous";
 
     const divIcons = document.createElement("div");
@@ -167,7 +173,74 @@ function removeItems() {
   }
 }
 
+function validateTitleNewWork() {
+  const titleError = document.getElementById("title-error");
+  const title = document.getElementById("title");
+  title.addEventListener("keyup", function (e) {
+    e.preventDefault();
+    if (title.value.length == 0) {
+      titleError.innerHTML = "Required";
+      return false;
+    } else if (!title.value.match(/^[A-Za-z\._\-[0-9]{1,15}$/)) {
+      titleError.innerHTML = "Invalid";
+      return false;
+    } else {
+      titleError.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+      return true;
+    }
+  });
+}
+
+// Switch Modal
+
+const leftArrowIcon = document.querySelector(".fa-arrow-left");
+const modalWrapperIcons = document.querySelector(".modal-wrapper-icon");
+const modalWrapperTitle = document.querySelector(".modal-wrapper-title h2");
+const modalWrapperContainer = document.querySelector(
+  ".modal-wrapper-container"
+);
+const modal2WrapperContainer = document.querySelector(
+  ".modal2-wrapper-container"
+);
+const modalButton = document.getElementById("add-photo");
+const modalLink = document.getElementById("modal-Deletelink");
+const modalWrapper = document.querySelector(".modal-wrapper");
+const modalWrapperHrTag = document.getElementById("js-hrTag");
+
+function switchModalAdd() {
+  modalButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    modalWrapperContainer.style.display = "none";
+    modal2WrapperContainer.style.display = "flex";
+    leftArrowIcon.style.display = "flex";
+    modalWrapperTitle.innerText = "Ajout photo";
+    modalLink.style.display = "none";
+    modalButton.style.display = "none";
+    modalWrapperHrTag.style.display = "none";
+  });
+  return null;
+}
+
+function switchBackModal() {
+  leftArrowIcon.addEventListener("click", function (event) {
+    event.preventDefault();
+    modalWrapperContainer.style.display = null;
+    modal2WrapperContainer.style.display = null;
+    leftArrowIcon.style.display = "none";
+    modalWrapperTitle.innerText = "Galerie photo";
+    modalLink.style.display = null;
+    modalButton.style.display = "flex";
+    modalWrapperHrTag.style.display = "flex";
+  });
+  return null;
+}
+
 function submitForm() {
+  const submitError = document.getElementById("modalSubmit-error");
+  const preview = document.getElementById("preview");
+  const icon = document.querySelector(".add-photo-container i");
+  const label = document.querySelector(".add-photo-container label");
+  const paragraph = document.querySelector(".add-photo-container p");
   document
     .getElementById("submit")
     .addEventListener("click", async function (event) {
@@ -194,15 +267,64 @@ function submitForm() {
           },
           body: formData,
         });
-        if (response.ok) {
+        if (response.status == 400) {
+          console.log(response);
+          submitError.style.display = "block";
+          submitError.innerHTML = "Bad request";
+          return false;
+        } else if (response.status == 401) {
+          console.log(response);
+          submitError.style.display = "block";
+          submitError.innerHTML = "Unauthorized";
+          return false;
+        } else if (response.status == 500) {
+          console.log(response);
+          submitError.style.display = "block";
+          submitError.innerHTML = "Unexpected Error";
+          return false;
+        } else {
+          console.log(response);
+
           const result = await response.json();
           console.log("Success: ", result);
+
           document.querySelector(".gallery").innerHTML = "";
           document.querySelector(".modal-wrapper-container").innerHTML = "";
           generateWorks();
           generateWorksModal();
-        } else {
-          console.log("Failed to add work");
+
+          // const divGallery = document.querySelector(".gallery");
+          // const newElement = document.createElement("figure");
+          // newElement.innerHTML = `<img src="${result.imageUrl}" alt="Sophie Bluel project" crossOrigin = "Anonymous">
+          //   <figcaption>${result.title}</figcaption>`;
+          // divGallery.appendChild(newElement);
+          
+          
+          // const divModal = document.querySelector(".modal-wrapper-container");
+          // const newModalElement = document.createElement("figure");
+          // newModalElement.innerHTML = `<img src="${result.imageUrl}" alt="Sophie Bluel project" crossOrigin = "Anonymous">
+          //   <figcaption>${result.title}</figcaption>`;
+          // divModal.appendChild(newModalElement);
+
+
+          const addedWork = document.getElementById("add-message");
+          addedWork.innerHTML =
+            '<i class="fa-solid fa-circle-check fa-xl"></i>';
+          setTimeout(function () {
+            addedWork.style.display = "none";
+          }, 5000);
+          preview.style.display = "none";
+          icon.style.display = "flex";
+          label.style.display = "flex";
+          paragraph.style.display = "flex";
+          modalWrapperContainer.style.display = "flex";
+          modal2WrapperContainer.style.display = "none";
+          leftArrowIcon.style.display = "none";
+          modalWrapperTitle.innerText = "Galerie photo";
+          modalLink.style.display = null;
+          modalButton.style.display = "flex";
+          modalWrapperHrTag.style.display = "flex";
+          document.querySelector(".modal").style.display = "none";
         }
       } catch (error) {
         console.log("Error: ", error);
@@ -218,6 +340,9 @@ async function run() {
   initEditMod();
   generateWorksModal(works);
   removeItems();
+  validateTitleNewWork();
+  switchModalAdd();
+  switchBackModal();
   submitForm();
 }
 
