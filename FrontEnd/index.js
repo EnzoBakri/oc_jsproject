@@ -287,25 +287,8 @@ function submitForm() {
 
           const result = await response.json();
           console.log("Success: ", result);
-
-          document.querySelector(".gallery").innerHTML = "";
-          document.querySelector(".modal-wrapper-container").innerHTML = "";
-          generateWorks();
-          generateWorksModal();
-
-          // const divGallery = document.querySelector(".gallery");
-          // const newElement = document.createElement("figure");
-          // newElement.innerHTML = `<img src="${result.imageUrl}" alt="Sophie Bluel project" crossOrigin = "Anonymous">
-          //   <figcaption>${result.title}</figcaption>`;
-          // divGallery.appendChild(newElement);
-          
-          
-          // const divModal = document.querySelector(".modal-wrapper-container");
-          // const newModalElement = document.createElement("figure");
-          // newModalElement.innerHTML = `<img src="${result.imageUrl}" alt="Sophie Bluel project" crossOrigin = "Anonymous">
-          //   <figcaption>${result.title}</figcaption>`;
-          // divModal.appendChild(newModalElement);
-
+          addElement(result);
+          addElementModal(result);
 
           const addedWork = document.getElementById("add-message");
           addedWork.innerHTML =
@@ -324,12 +307,35 @@ function submitForm() {
           modalLink.style.display = null;
           modalButton.style.display = "flex";
           modalWrapperHrTag.style.display = "flex";
-          document.querySelector(".modal").style.display = "none";
+          // document.querySelector(".modal").style.display = "none";
         }
       } catch (error) {
         console.log("Error: ", error);
       }
     });
+}
+
+async function addElement(worksToDisplay) {
+  const works = worksToDisplay ? worksToDisplay : await getData();
+  const divGallery = document.querySelector(".gallery");
+  const newFigure = document.createElement("figure");
+  newFigure.innerHTML = `<img src="${works.imageUrl}" alt="Sophie Bluel project" crossOrigin = "Anonymous"><figcaption>${works.title}</figcaption>`;
+  divGallery.appendChild(newFigure);
+}
+
+async function addElementModal(worksToDisplayModal) {
+  const works = worksToDisplayModal ? worksToDisplayModal : await getData();
+  const divModal = document.querySelector(".modal-wrapper-container");
+  const newFigure = document.createElement("figure");
+  newFigure.id = "figureModal";
+  newFigure.classList.add("js-figureModal");
+  newFigure.innerHTML = `<img src="${works.imageUrl}" alt="Sophie Bluel project" crossOrigin = "Anonymous">
+  <div class="modal-icons">
+  <i class="fa-solid fa-arrows-up-down-left-right fa-xs" id="crossIconModal"></i>
+  <i class="fa-solid fa-trash-can fa-xs" data-id="${works.id}"></i>
+  </div>
+  <p>éditer</p>`;
+  divModal.appendChild(newFigure);
 }
 
 async function run() {
