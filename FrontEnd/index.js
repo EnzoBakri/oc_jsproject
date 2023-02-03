@@ -1,15 +1,16 @@
 async function getData() {
   try {
-    const response = await fetch("http://localhost:5678/api/works");
+    const res = await fetch("http://localhost:5678/api/works");
 
-    if (response.ok) {
-      const data = await response.json();
-      return data;
+    if (!res.ok) {
+      const message = `An error has occured: ${res.status} - ${res.statusText}`;
+      throw new Error(message);
     } else {
-      console.log("Failed to get works from server");
+      const data = await res.json();
+      return data;
     }
   } catch (error) {
-    console.log("Error:", error);
+    console.log("Error: " + error);
   }
 }
 
@@ -37,7 +38,10 @@ async function generateWorks(worksToDisplay) {
   }
 }
 
-async function filterWorks(works) {
+generateWorks();
+
+async function filterWorks() {
+  const works = await getData();
   const buttons = [
     {
       id: "all",
@@ -62,7 +66,7 @@ async function filterWorks(works) {
     buttonElement.addEventListener("click", function () {
       document.querySelector(".gallery").innerHTML = "";
       if (button.categoryId === null) {
-        generateWorks();
+        generateWorks(works);
       } else {
         const filteredWorks = works.filter(
           (work) => work.categoryId === button.categoryId
@@ -97,6 +101,8 @@ function initEditMod() {
   }
 }
 
+initEditMod();
+
 async function generateWorksModal(worksToDisplayModal) {
   const works = worksToDisplayModal ? worksToDisplayModal : await getData();
   for (let i = 0; i < works.length; i++) {
@@ -106,6 +112,7 @@ async function generateWorksModal(worksToDisplayModal) {
 
     const modalElement = document.createElement("figure");
     modalElement.id = "figureModal";
+    modalElement.dataset.id = article.id;
     modalElement.classList.add("js-figureModal");
 
     const imageModal = document.createElement("img");
@@ -139,12 +146,15 @@ async function generateWorksModal(worksToDisplayModal) {
   }
 }
 
-function removeItems() {
+generateWorksModal();
+
+async function removeItems() {
   const deleteIcons = document.querySelectorAll(".fa-trash-can");
   for (let i = 0; i < deleteIcons.length; i++) {
-    deleteIcons[i].addEventListener("click", async function (event) {
-      event.preventDefault();
+    deleteIcons[i].addEventListener("click", async function (e) {
+      e.preventDefault();
       const id = event.target.dataset.id;
+      console.log(id);
       const deleteMethod = {
         method: "DELETE",
         headers: {
@@ -153,21 +163,29 @@ function removeItems() {
         },
       };
       try {
-        const response = await fetch(
+        const res = await fetch(
           `http://localhost:5678/api/works/${id}`,
           deleteMethod
         );
-        if (response.ok) {
-          console.log(response);
-          document.querySelector(".gallery").innerHTML = "";
-          document.querySelector(".modal-wrapper-container").innerHTML = "";
+
+        if (!res.ok) {
+          const message = "Error with Status code: " + res.status;
+          throw new Error(message);
+        } else {
+          console.log(res);
+          const addedWork = document.getElementById("add-message");
+          addedWork.innerHTML =
+            '<i class="fa-solid fa-circle-check fa-xl"></i>';
+          setTimeout(function () {
+            addedWork.style.display = "none";
+          }, 5000);
+          clearAll();
           generateWorks();
           generateWorksModal();
-        } else {
-          console.log("Error with deleting work");
+          run();
         }
       } catch (error) {
-        console.log(error);
+        console.log("Error: " + error);
       }
     });
   }
@@ -191,7 +209,7 @@ function validateTitleNewWork() {
   });
 }
 
-// Switch Modal
+validateTitleNewWork();
 
 const leftArrowIcon = document.querySelector(".fa-arrow-left");
 const modalWrapperIcons = document.querySelector(".modal-wrapper-icon");
@@ -221,6 +239,8 @@ function switchModalAdd() {
   return null;
 }
 
+switchModalAdd();
+
 function switchBackModal() {
   leftArrowIcon.addEventListener("click", function (event) {
     event.preventDefault();
@@ -235,7 +255,9 @@ function switchBackModal() {
   return null;
 }
 
-function submitForm() {
+switchBackModal();
+
+async function submitForm() {
   const submitError = document.getElementById("modalSubmit-error");
   const preview = document.getElementById("preview");
   const icon = document.querySelector(".add-photo-container i");
@@ -245,7 +267,6 @@ function submitForm() {
     .getElementById("submit")
     .addEventListener("click", async function (event) {
       event.preventDefault();
-      // Récupération des valeurs des champs de formualire
       const fileInput = document.getElementById("file");
       const title = document.getElementById("title");
       const select = document.getElementById("category");
@@ -259,7 +280,7 @@ function submitForm() {
       const token = window.sessionStorage.getItem("token");
 
       try {
-        const response = await fetch("http://localhost:5678/api/works", {
+        const res = await fetch("http://localhost:5678/api/works", {
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -267,35 +288,22 @@ function submitForm() {
           },
           body: formData,
         });
-        if (response.status == 400) {
-          console.log(response);
+        if (!res.ok) {
           submitError.style.display = "block";
-          submitError.innerHTML = "Bad request";
-          return false;
-        } else if (response.status == 401) {
-          console.log(response);
-          submitError.style.display = "block";
-          submitError.innerHTML = "Unauthorized";
-          return false;
-        } else if (response.status == 500) {
-          console.log(response);
-          submitError.style.display = "block";
-          submitError.innerHTML = "Unexpected Error";
-          return false;
+          submitError.innerHTML = "An error has occured";
+          const message = `An error has occured: ${res.status} - ${res.statusText}`;
+          throw new Error(message);
         } else {
-          console.log(response);
-
-          const result = await response.json();
-          console.log("Success: ", result);
-          addElement(result);
-          addElementModal(result);
-
+          const data = await res.json();
           const addedWork = document.getElementById("add-message");
           addedWork.innerHTML =
             '<i class="fa-solid fa-circle-check fa-xl"></i>';
           setTimeout(function () {
             addedWork.style.display = "none";
           }, 5000);
+          addElement(data);
+          addElementModal(data);
+          run();
           preview.style.display = "none";
           icon.style.display = "flex";
           label.style.display = "flex";
@@ -307,13 +315,14 @@ function submitForm() {
           modalLink.style.display = null;
           modalButton.style.display = "flex";
           modalWrapperHrTag.style.display = "flex";
-          // document.querySelector(".modal").style.display = "none";
         }
       } catch (error) {
-        console.log("Error: ", error);
+        console.log("Error: " + error);
       }
     });
 }
+
+submitForm();
 
 async function addElement(worksToDisplay) {
   const works = worksToDisplay ? worksToDisplay : await getData();
@@ -338,18 +347,15 @@ async function addElementModal(worksToDisplayModal) {
   divModal.appendChild(newFigure);
 }
 
+function clearAll() {
+  document.querySelector(".gallery").innerHTML = "";
+  document.querySelector(".modal-wrapper-container").innerHTML = "";
+}
+
 async function run() {
   const works = await getData();
-
-  generateWorks(works);
   filterWorks(works);
-  initEditMod();
-  generateWorksModal(works);
   removeItems();
-  validateTitleNewWork();
-  switchModalAdd();
-  switchBackModal();
-  submitForm();
 }
 
 run();
