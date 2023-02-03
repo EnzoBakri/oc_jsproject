@@ -58,11 +58,7 @@ async function basicLogin() {
 
       if (!res.ok) {
         submitError.style.display = "block";
-        submitError.innerHTML = "An error has occured";
-        pswError.innerHTML =
-          '<i class="fa-solid fa-circle-xmark fa-lg red"></i>';
-        emailError.innerHTML =
-          '<i class="fa-solid fa-circle-xmark fa-lg red"></i>';
+        submitError.innerHTML = "Erreur dans l'identifiant ou le mot de passe";
         setTimeout(function () {
           submitError.style.display = "none";
           pswError.style.display = "none";

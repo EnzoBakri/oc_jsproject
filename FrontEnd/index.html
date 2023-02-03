@@ -62,12 +62,12 @@
               <i class="fa-regular fa-image fa-5x"></i>
               <img id="preview" src="" alt="Image preview" />
               <label for="file" class="label-file">+ Ajouter photo</label>
-              <input type="file" id="file" class="input-file" name="file" accept=".jpg,.jpeg,.png" />
+              <input type="file" id="file" class="input-file" name="file" accept=".jpg,.jpeg,.png" required/>
               <p>jpg, png : 4mo max</p>
             </div>
             <div class="form-column" id="form-column-title">
               <label for="title">Titre</label>
-              <input type="text" placeholder="Enter a title" name="title" id="title" />
+              <input type="text" placeholder="Enter a title" name="title" id="title" minlength="1" maxlength="25" required/>
               <span id="title-error"></span>
             </div>
             <div class="form-column" id="form-column-select">

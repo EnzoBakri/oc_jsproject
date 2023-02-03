@@ -199,9 +199,6 @@ function validateTitleNewWork() {
     if (title.value.length == 0) {
       titleError.innerHTML = "Required";
       return false;
-    } else if (!title.value.match(/^[A-Za-z\._\-[0-9]{1,15}$/)) {
-      titleError.innerHTML = "Invalid";
-      return false;
     } else {
       titleError.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
       return true;
@@ -290,7 +287,10 @@ async function submitForm() {
         });
         if (!res.ok) {
           submitError.style.display = "block";
-          submitError.innerHTML = "An error has occured";
+          submitError.innerHTML = "Informations manquantes";
+          setTimeout(function () {
+            submitError.style.display = "none";
+          }, 5000);
           const message = `An error has occured: ${res.status} - ${res.statusText}`;
           throw new Error(message);
         } else {
